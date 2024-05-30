@@ -1,0 +1,54 @@
+body{
+    background-color: rgb(202, 202, 202);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+  }
+
+#sideNav{
+    background-color: rgb(40, 40, 40);
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    width: 13rem;
+    height: 100vh;
+}
+
+#sideNav .navbar .nav-item .nav-link {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+}
+
+.navbar{
+    display: flex;
+}
+
+.navbar-nav{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 160px;
+}
+
+.nav-item{
+    height: 100%;
+    align-content: center;
+}
+
+.nav-link{
+    text-decoration: none;
+    color: rgb(139, 139, 139);
+}
+
+.nav-link:hover{
+    color: rgb(209, 208, 208);
+}
