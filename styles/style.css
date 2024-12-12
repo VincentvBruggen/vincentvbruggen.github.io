@@ -83,8 +83,6 @@ p.lead {
 
 #main-container{
     width: 100%;
-    padding-right: 0.75rem;
-    padding-left: 0.75rem;
     margin-right: auto;
     margin-left: auto;
 }
@@ -99,8 +97,20 @@ section.resume-section {
     max-width: 75rem;
 }
 
+#projects{
+    padding-top: 0rem;
+}
+div .project-images {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    max-width: 50%;
+}
 .resume-section-content{
     
+}
+.portfolio-item:hover{
+    transform: scale(1.05)
 }
 
 #portfolio .portfolio-item {
@@ -227,7 +237,8 @@ section.resume-section {
 }
 
 .mb-5, .my-5 {
-    margin-bottom: 3rem !important;
+    margin-bottom: 2rem !important;
+    margin-top: 1rem;
 }
 
 .mb-0, .my-0 {
