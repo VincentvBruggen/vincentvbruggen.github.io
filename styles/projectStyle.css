@@ -1,8 +1,8 @@
 body{
+    overflow-x: hidden;
     background-color: rgb(202, 202, 202);
     font-family: 'JetBrains Mono', monospace;
     margin-right: 0rem;
-
     padding-left: 5rem !important;
     max-width: 100%;
 }
