@@ -1,116 +1,17 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <link rel="stylesheet" href="styles/style.css">
-    
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vincent van Bruggen</title>
-</head>
-<body style="background-position: 20% 0px;">
-    <nav id="sideNav">
-        <div class="navbar">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#projects">projects</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#about-me">about me</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#skills">skills</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#contact">contact</a>
-                </li>
-            </ul>
-        </div>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React + TS</title>
 
-        <div class="socials">
-            <a href="http://">
-                <img src="" alt="">
-            </a>
-        </div>
-    </nav>
-
-    <div id="main-container">
-        <section class="resume-section" id="projects">
-            <div class="resume-section-content">
-                <h2 class="mb-5">Projects&nbsp;</h2>
-
-                <section id="portfolio">
-                    <br>
-                    <h3 class="mb-0">Solo Projects</h3>
-                    <br>
-                    <div class="row">
-                        <div class="col-lg-4 col-sm-6 mb-4">
-                            <div class="portfolio-item">
-                                <a class="portfolio-link" data-toggle="modal" href="shy.html">
-                                    <img class="img-fluid" src="assets/images/portfolio/Shy/thumbnail.png" alt="">
-                                </a>
-                                <div class="portfolio-caption">
-                                    <div class="portfolio-caption-heading">Shy Game </div>
-                                    <div class="portfolio-caption-subheading text-muted">Unity C#, 24 May 2024</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <h3 class="mb-0"> Team Projects</h3>
-                    <br>
-                    <div class="row">
-                        <div class="col-lg-4 col-sm-6 mb-4">
-                            <div class="portfolio-item">
-                                <a class="portfolio-link" data-toggle="modal" href="gandalf.html">
-                                    <img class="img-fluid" src="assets/images/portfolio/Gandalf/Thumbnail.png" alt="">
-                                </a>
-                                <div class="portfolio-caption">
-                                    <div class="portfolio-caption-heading">Gandalf's magical adventure </div>
-                                    <div class="portfolio-caption-subheading text-muted">Unity C#, 05 April 2024</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </section>
-        <section class="resume-section" id="about-me">
-            <div class="resume-section-content">
-                <h2 class="mb-5">About</h2>
-                <h1 class="mb-0"> Vincent van Bruggen</h1>
-                <br>
-
-                <div class="row">
-                    <div class="col-lg-2 col-sm-2 mb-2">
-                        <img class="img-fluid profilePic" style="width: 10rem; height: auto; align-items: center;
-                        box-shadow: 1px -1px 11px 2px rgba(0,0,0,0.24)" 
-                        src="assets/images/profile/IMG_20231015_135623_240.jpg" alt="">
-                    </div>
-                    <div class="col-lg-9 col-sm-9 mb-9">
-                        <p class="lead mb-5">
-                            I am a passionate and creative game developer. Since I was young
-                            I had already made up my mind to pursue a programming career.
-                            And when i was 16 i started my first course at the 
-                            Grafisch Lyceum Utrecht where i pursued my dream with the course 
-                            Creative Software Developer as sub-module Game Development. 
-                            And here is where i truly found my passion 
-                            <br>
-                            <br>
-                            Early on I found creating worlds and making things work together to 
-                            be very fun. This is what motivated me to become better and start 
-                            working on my own projects outside of school and learn to use other tools.
-                            Tools like Godot and Unity are the Engines I love to use the most.
-                            And sd will keep pursuing this dream of mine to make games and
-                            make people happy.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="resume-section" id="contact">
-
-        </section>
-    </div>
-</body>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>

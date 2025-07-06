@@ -1,0 +1,17 @@
+﻿[
+  {
+    "title": "Neon Runner",
+    "description": "This project was my deep dive into procedural generation and shader effects in Unity. The challenge was creating a fast, responsive controller that felt good to play.",
+    "image": "/assets/images/project1.png",
+    "tech": ["Unity", "C#", "URP", "Shader Graph"],
+    "githubUrl": "https://github.com/your-username/neon-runner",
+    "liveUrl": "https://your-username.itch.io/neon-runner"
+  },
+  {
+    "title": "Aetheria Chronicles",
+    "description": "As a fan of Action RPGs, I built this prototype to learn Unreal Engine's gameplay ability system and C++ architecture, focusing on a flexible combo-based combat system.",
+    "image": "https://placehold.co/600x400/0a0a1a/ff00c1?text=Aetheria",
+    "tech": ["Unreal Engine", "C++", "Blueprints"],
+    "githubUrl": "https://github.com/your-username/aetheria"
+  }
+]
