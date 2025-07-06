@@ -1,8 +1,8 @@
 ﻿[
   {
-    "title": "Neon Runner",
-    "description": "This project was my deep dive into procedural generation and shader effects in Unity. The challenge was creating a fast, responsive controller that felt good to play.",
-    "image": "/assets/images/project1.png",
+    "title": "Ballpit Chase",
+    "description": "This project was my first dive into local multiplayer game devlopment using Unity's Input System instead of the Input Manager. I created a fast paced pvp arcade game where players fight to not be that last tagger when the timer runs out.",
+    "image": "/assets/images/ballpit.png",
     "tech": ["Unity", "C#", "URP", "Shader Graph"],
     "githubUrl": "https://github.com/your-username/neon-runner",
     "liveUrl": "https://your-username.itch.io/neon-runner"

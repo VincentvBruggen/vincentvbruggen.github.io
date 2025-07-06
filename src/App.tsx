@@ -62,7 +62,7 @@ export default function App() {
                         <h3>Hi, my name is</h3>
                         <h1>Vincent</h1>
                         <h2>Creating fun and immersive gameplay from concept to launch.</h2>
-                        <p>I am a passionate game developer that specializes in Gameplay Development. Building engaging experiences from concept up to reality.</p>
+                        <p>I am a game developer that specializes in Gameplay Development. Building engaging experiences from concept up to reality.</p>
                         <CTAButton href="#about">Learn More</CTAButton>
                     </HeroContent>
                 </HeroSection>
@@ -129,9 +129,9 @@ export default function App() {
                     </ContactText>
                     <ContactEmail href="mailto:lachenbekkie2701@gmail.com">lachenbekkie2701@gmail.com</ContactEmail>
                     <SocialLinks>
-                        <a href="https://github.com/your-username" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
-                        <a href="https://www.linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
-                        <a href="https://your-username.itch.io/" target="_blank" rel="noopener noreferrer"><FaItchIo /></a>
+                        <a href="https://github.com/VincentvBruggen" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
+                        <a href="https://www.linkedin.com/in/vincent-van-bruggen/" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
+                        <a href="https://nt4p.itch.io/" target="_blank" rel="noopener noreferrer"><FaItchIo /></a>
                     </SocialLinks>
                 </Section>
             </MainContent>
