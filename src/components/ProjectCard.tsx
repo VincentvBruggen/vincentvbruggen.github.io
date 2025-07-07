@@ -17,11 +17,26 @@ const Card = styled(motion.div)`
     }
 `;
 
+const Placeholder = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: ${ ({ theme }) => theme.colors.secondary}20; /* 20 is for alpha transparency */
+    color: ${({ theme }) => theme.colors.text};
+    font-size: 2rem;
+    font-weight: bold;
+    border-radius: 12px;
+`;
+
 const ImageWrapper = styled.div`
     width: 100%;
     padding-top: 56.25%; /* 16:9 Aspect Ratio */
     position: relative;
-    background: #000;
 
     img, video {
         position: absolute;
@@ -91,17 +106,19 @@ export interface ProjectCardProps {
     tech: string[];
     githubUrl?: string;
     liveUrl?: string;
+    imageClassName?: string; // Optional class for custom styling
 }
 
-export const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, image, tech, githubUrl, liveUrl }) => {
+export const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, image, tech, githubUrl, liveUrl, imageClassName }) => {
     return (
         <Card>
             <ImageWrapper>
-                {image.endsWith('.mp4') || image.endsWith('.webm') ? (
-                    <video src={image} autoPlay loop muted playsInline />
-                ) : (
-                    <img src={image} alt={title} />
-                )}
+                {image
+                    ? (image.endsWith('.mp4') || image.endsWith('.webm')
+                        ? <video src={image} autoPlay loop muted playsInline />
+                        : <img src={image || "/assets/images/project1.png"} alt={title} className={imageClassName} />)
+                    : <Placeholder>{title}</Placeholder>
+                }
             </ImageWrapper>
             <Content>
                 <Title>{title}</Title>

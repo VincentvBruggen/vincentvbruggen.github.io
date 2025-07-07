@@ -40,6 +40,11 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
 
+  .small-image {
+      height: 100% !important;
+      object-fit: contain !important;
+  }
+
   /* Custom scrollbar for a better aesthetic */
   ::-webkit-scrollbar {
     width: 8px;

@@ -6,8 +6,8 @@ import { ProjectCard, type ProjectCardProps } from './components/ProjectCard';
 import { useState } from 'react';
 
 // Icons
-import { FaUnity, FaLinkedin, FaGithub, FaBars, FaTimes, FaItchIo } from 'react-icons/fa';
-import { SiSharp, SiBlender } from 'react-icons/si';
+import { FaUnity, FaLinkedin, FaGithub, FaBars, FaTimes, FaItchIo, FaCubes } from 'react-icons/fa';
+import { SiSharp} from 'react-icons/si';
 
 // Assets
 import profilePic from './assets/images/profile.jpg';
@@ -73,20 +73,20 @@ export default function App() {
                     <AboutContainer>
                         <AboutText>
                             <p>
-                                Hello! I'm [Your Name], a developer driven by a fascination for how intricate systems and compelling art can combine to create unforgettable experiences. My journey began not in a classroom, but with [Your Origin Story, e.g., the level editors of Warcraft 3, a Python script to automate a game]. It taught me that at its heart, development is about creative problem-solving.
+                                Hello! I am Vincent, a developer with a love for creating fun mechanics, interesting systems and entertaining experiences. My journey began with a curiosity for how games are made, starting off with simple games using basic web development and a Unity tutorial. Doing this I discovered my passion for game development and the joy of bringing ideas to life through code.
                             </p>
                             <br />
                             <p>
-                                I believe the best games are built by collaborative teams where every voice is valued. I thrive in environments where I can both contribute my technical skills and learn from artists, designers, and other engineers. My goal is to join a team that is as passionate about building polished, player-first games as I am.
+                                I believe the best games are built by collaborative teams where good communication is key. I thrive in environments where I can both contribute my technical skills and learn from other creative minds. My goal is to join a team that focuses on creating fun and entertaining gameplay experiences, where I can continue to grow as a developer and in future create my own games.
                             </p>
                             <ul>
-                                <li><span role="img" aria-label="sparkle">✨</span> Creative Problem-Solver</li>
-                                <li><span role="img" aria-label="people">👥</span> Collaborative Teammate</li>
-                                <li><span role="img" aria-label="brain">🧠</span> Lifelong Learner</li>
+                                <li><span role="img" aria-label="brain">🧠</span> Problem solving</li>
+                                <li><span role="img" aria-label="people">👥</span> Collaborative</li>
+                                <li><span role="img" aria-label="speech">💬</span> Communicative</li>
                             </ul>
                         </AboutText>
                         <AboutImageContainer>
-                            <img src={profilePic} alt="Your Name"/>
+                            <img src={profilePic} alt="Vincent"/>
                         </AboutImageContainer>
                     </AboutContainer>
                 </Section>
@@ -98,17 +98,17 @@ export default function App() {
                         <PhilosophyCard>
                             <PhilosophyIcon><FaUnity/></PhilosophyIcon>
                             <h3>Engine Expertise</h3>
-                            <p>I focus on Unity and Unreal Engine to bring ideas to life, using the right engine for the job. My strength lies in core systems: gameplay mechanics, player controllers, and UI architecture.</p>
+                            <p>I use Unity and I am learning to use Godot to bring ideas to life. Very comfortable with Unity to create systems for: Gameplay, UI, and learning Multiplayer and AI</p>
                         </PhilosophyCard>
                         <PhilosophyCard>
                             <PhilosophyIcon><SiSharp/></PhilosophyIcon>
                             <h3>Logic & Language</h3>
-                            <p>C# and C++ are my primary tools for building robust, performant, and scalable game logic. I write clean, maintainable code that my teammates can easily understand and build upon.</p>
+                            <p>C# is my primary tool for building performant, and scalable game logic. I write clean, maintainable code using concepts such as DRY so that my teammates can easily understand and build upon my code.</p>
                         </PhilosophyCard>
                         <PhilosophyCard>
-                            <PhilosophyIcon><SiBlender/></PhilosophyIcon>
+                            <PhilosophyIcon><FaCubes/></PhilosophyIcon>
                             <h3>From Concept to Creation</h3>
-                            <p>I'm comfortable working across the development pipeline, using tools like Blender for prototyping and Git for version control to ensure a smooth, collaborative workflow from the first commit to the final build.</p>
+                            <p>I am comfortable working with different software, using tools like Blender for prototyping and Git for version control to ensure a smooth, collaborative workflow from the first commit to the final build.</p>
                         </PhilosophyCard>
                     </PhilosophyGrid>
                 </Section>
@@ -471,6 +471,9 @@ const PhilosophyIcon = styled.div`
 
 const ProjectsGrid = styled.div`
     display: grid;
+    flex-wrap: wrap;
+    min-width: 0;
+    min-height: 0;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: ${({ theme }) => theme.spacing.large};
 

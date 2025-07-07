@@ -30,12 +30,20 @@ interface SectionProps {
 export const Section: React.FC<SectionProps> = ({ id, children }) => {
     const isMobile = useIsMobile();
 
+    // Set viewport amount based on section id
+    const viewportAmount =
+        id === 'projects'
+            ? 0.1 // earlier trigger for projects
+            : isMobile
+                ? 0.2
+                : 0.3;
+
     return (
         <SectionWrapper
             id={id}
             initial={ { opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={isMobile ? { once: false, amount: 0.2 } : { once: false, amount: 0.4 }}
+            viewport={{ once: false, amount: viewportAmount }}
             transition={isMobile ? { duration: 0.6 } : { duration: 0.6 }}
         >
             {children}
