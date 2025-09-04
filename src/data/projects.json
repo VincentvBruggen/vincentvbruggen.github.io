@@ -1,5 +1,6 @@
 ﻿[
   {
+    "id": "1",
     "title": "Ballpit Chase",
     "description": "This project was my first dive into local multiplayer game devlopment using Unity's Input System instead of the Input Manager. I created a fast paced pvp arcade game where players fight to not be that last tagger when the timer runs out.",
     "image": "/assets/images/ballpit.png",
@@ -9,6 +10,7 @@
     "imageClassName": "small-image"
   },
   {
+    "id": "2",
     "title": "Gandalf's Magical Adventure",
     "description": "This project was my first time building a game with an team of developers and artists. I was responsible for most of the gameplay programming, including the player controller, enemy AI, and various game mechanics. The game is a 3d shoot em up where you play as a wizard that needs to defeat the giant spider.",
     "image": "/assets/images/gandalf.png",
@@ -18,6 +20,7 @@
     "imageClassName": "small-image"
   },
   {
+    "id": "3",
     "title": "A Greek Odyssey",
     "description": "This project was my first time creating a complete game from scratch within a team of developers and artists. I was responsible for the multiplayer functionality since I had some experience with Photon Pun 2. The game is a Mario Party inspired game where players compete in various mini-games to collect coins and ambrosia, for the one with the most ambrosia wins.",
     "image": "/assets/images/greek.png",
@@ -26,18 +29,13 @@
     "liveUrl": "https://nt4p.itch.io/total-warfare"
   },
   {
+    "id": "4",
     "title": "Total Warfare",
     "description": "This project was my first experience with online multiplayer game development using Photon Pun 2. I was creating a sci-fi themed 3rd person RTS game with working online multiplayer where players could build bases, gather resources and use their armies to defeat the enemy. I was able to implement some core gameplay mechanics such as building placement, and ordering units.",
     "image": "",
     "tech": ["Unity", "C#", "URP", "Photon Pun 2"],
     "githubUrl": "https://github.com/VincentvBruggen/Total-Warfare",
     "liveUrl": "https://nt4p.itch.io/total-warfare"
-  },
-  {
-    "title": "Game Portfolio",
-    "description": "This project is my first deep dive into developing a website, this is my personal portfolio website where I showcase my game development projects. It is built with React and TypeScript. I focused on making the website responsive with a modern design.",
-    "image": "/assets/images/portfolioImage.png",
-    "tech": ["React", "TypeScript", "Vite", "Styled Components"]
   }
 
 ]

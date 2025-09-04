@@ -2,6 +2,7 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Card = styled(motion.div)`
     background: ${({ theme }) => theme.colors.cardBg};
@@ -99,7 +100,9 @@ const Links = styled.div`
     }
 `;
 
+
 export interface ProjectCardProps {
+    id: string;
     title: string;
     description: string;
     image: string; // URL to an image or GIF
@@ -109,28 +112,30 @@ export interface ProjectCardProps {
     imageClassName?: string; // Optional class for custom styling
 }
 
-export const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, image, tech, githubUrl, liveUrl, imageClassName }) => {
+export const ProjectCard: React.FC<ProjectCardProps> = ({ id, title, description, image, tech, githubUrl, liveUrl, imageClassName }) => {
     return (
-        <Card>
-            <ImageWrapper>
+        <Link to={`/projects/${id}`} style={{ textDecoration: 'none' }}>
+            <Card>
+                <ImageWrapper>
                 {image
-                    ? (image.endsWith('.mp4') || image.endsWith('.webm')
-                        ? <video src={image} autoPlay loop muted playsInline />
-                        : <img src={image || "/assets/images/project1.png"} alt={title} className={imageClassName} />)
-                    : <Placeholder>{title}</Placeholder>
+                ? (image.endsWith('.mp4') || image.endsWith('.webm')
+                    ? <video src={image} autoPlay loop muted playsInline/>
+                    : <img src={image || "/assets/images/project1.png"} alt={title} className={imageClassName}/>)
+                : <Placeholder>{title}</Placeholder>
                 }
-            </ImageWrapper>
-            <Content>
-                <Title>{title}</Title>
-                <Description>{description}</Description>
-                <TechList>
+                </ImageWrapper>
+                <Content>
+                    <Title>{title}</Title>
+                    <Description>{description}</Description>
+                    <TechList>
                     {tech.map(t => <TechItem key={t}>{t}</TechItem>)}
-                </TechList>
-                <Links>
-                    {githubUrl && <a href={githubUrl} target="_blank" rel="noopener noreferrer"><FaGithub /></a>}
-                    {liveUrl && <a href={liveUrl} target="_blank" rel="noopener noreferrer"><FaExternalLinkAlt /></a>}
-                </Links>
-            </Content>
-        </Card>
+                    </TechList>
+                    <Links>
+                    {githubUrl && <a href={githubUrl} target="_blank" rel="noopener noreferrer"><FaGithub/></a>}
+                    {liveUrl && <a href={liveUrl} target="_blank" rel="noopener noreferrer"><FaExternalLinkAlt/></a>}
+                    </Links>
+                </Content>
+            </Card>
+        </Link>
     );
 };

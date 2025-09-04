@@ -4,6 +4,7 @@ import { theme } from './styles/theme';
 import { Section } from './components/Section';
 import { ProjectCard, type ProjectCardProps } from './components/ProjectCard';
 import { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // Icons
 import { FaUnity, FaLinkedin, FaGithub, FaBars, FaTimes, FaItchIo, FaCubes } from 'react-icons/fa';
@@ -23,6 +24,7 @@ import type { Engine } from "tsparticles-engine";
 
 // Data
 import projectsData from './data/projects.json';
+import DynamicProjectPage from './components/DynamicProjectPage';
 
 // === Main App Component ===
 export default function App() {
@@ -36,105 +38,146 @@ export default function App() {
     return (
         <ThemeProvider theme={theme}>
         <GlobalStyle />
-            {/* You can disable particles by commenting out the line below if they feel too distracting */}
-            <Particles id="tsparticles" init={particlesInit} options={particleOptions} />
+            <BrowserRouter>
+                <Particles id="tsparticles" init={particlesInit} options={particleOptions}/>
 
-            {/* --- HEADER --- */}
-            <Header>
-                <HomeButton href="#hero">
-                    <img src={profilePic} alt="Home" />
-                </HomeButton>
-                <MobileMenuButton onClick={() => setMenuOpen(!menuOpen)}>
-                    {menuOpen ? <FaTimes /> : <FaBars />}
-                </MobileMenuButton>
-                <Nav $open={menuOpen}>
-                    <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
-                    <a href="#philosophy" onClick={() => setMenuOpen(false)}>Philosophy</a>
-                    <a href="#projects" onClick={() => setMenuOpen(false)}>Work</a>
-                    <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
-                </Nav>
-            </Header>
+                {/* --- HEADER --- */}
+                <Header>
+                    <HomeButton href="#hero">
+                        <img src={profilePic} alt="Home"/>
+                    </HomeButton>
+                    <MobileMenuButton onClick={() => setMenuOpen(!menuOpen)}>
+                        {menuOpen ? <FaTimes/> : <FaBars/>}
+                    </MobileMenuButton>
+                    <Nav $open={menuOpen}>
+                        <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
+                        <a href="#philosophy" onClick={() => setMenuOpen(false)}>Philosophy</a>
+                        <a href="#projects" onClick={() => setMenuOpen(false)}>Work</a>
+                        <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
+                    </Nav>
+                </Header>
 
-                {/* --- HERO SECTION --- */}
-            <MainContent>
-                <HeroSection id="hero">
-                    <HeroContent>
-                        <h3>Hi, my name is</h3>
-                        <h1>Vincent</h1>
-                        <h2>Creating fun and immersive gameplay from concept to launch.</h2>
-                        <p>I am a game developer that specializes in Gameplay Development. Building engaging experiences from concept up to reality.</p>
-                        <CTAButton href="#about">Learn More</CTAButton>
-                    </HeroContent>
-                </HeroSection>
+                <Routes>
+                    <Route path="/" element={
+                        <MainContent>
+                            <HeroSection id="hero">
+                                <HeroContent>
+                                    <h3>Hi, my name is</h3>
+                                    <h1>Vincent</h1>
+                                    <h2>Creating fun and immersive gameplay from concept to launch.</h2>
+                                    <p>I am a game developer that specializes in Gameplay Development. Building engaging
+                                        experiences from concept up to reality.</p>
+                                    <CTAButton href="#about">Learn More</CTAButton>
+                                </HeroContent>
+                            </HeroSection>
 
-                {/* --- ABOUT SECTION (THE PITCH) --- */}
-                <Section id="about">
-                    <SectionTitle>About Me</SectionTitle>
-                    <AboutContainer>
-                        <AboutText>
-                            <p>
-                                Hello! I am Vincent, a developer with a love for creating fun mechanics, interesting systems and entertaining experiences. My journey began with a curiosity for how games are made, starting off with simple games using basic web development and a Unity tutorial. Doing this I discovered my passion for game development and the joy of bringing ideas to life through code.
-                            </p>
-                            <br />
-                            <p>
-                                I believe the best games are built by collaborative teams where good communication is key. I thrive in environments where I can both contribute my technical skills and learn from other creative minds. My goal is to join a team that focuses on creating fun and entertaining gameplay experiences, where I can continue to grow as a developer and in future create my own games.
-                            </p>
-                            <ul>
-                                <li><span role="img" aria-label="brain">🧠</span> Problem solving</li>
-                                <li><span role="img" aria-label="people">👥</span> Collaborative</li>
-                                <li><span role="img" aria-label="speech">💬</span> Communicative</li>
-                            </ul>
-                        </AboutText>
-                        <AboutImageContainer>
-                            <img src={profilePic} alt="Vincent"/>
-                        </AboutImageContainer>
-                    </AboutContainer>
-                </Section>
+                            {/* --- ABOUT SECTION (THE PITCH) --- */}
+                            <Section id="about">
+                                <SectionTitle>About Me</SectionTitle>
+                                <AboutContainer>
+                                    <AboutText>
+                                        <p>
+                                            Hello! I am Vincent, a developer with a love for creating fun mechanics,
+                                            interesting
+                                            systems and entertaining experiences. My journey began with a curiosity for
+                                            how
+                                            games are made, starting off with simple games using basic web development
+                                            and a
+                                            Unity tutorial. Doing this I discovered my passion for game development and
+                                            the
+                                            joy
+                                            of bringing ideas to life through code.
+                                        </p>
+                                        <br/>
+                                        <p>
+                                            I believe the best games are built by collaborative teams where good
+                                            communication
+                                            is key. I thrive in environments where I can both contribute my technical
+                                            skills
+                                            and
+                                            learn from other creative minds. My goal is to join a team that focuses on
+                                            creating
+                                            fun and entertaining gameplay experiences, where I can continue to grow as a
+                                            developer and in future create my own games.
+                                        </p>
+                                        <ul>
+                                            <li><span role="img" aria-label="brain">🧠</span> Problem solving</li>
+                                            <li><span role="img" aria-label="people">👥</span> Collaborative</li>
+                                            <li><span role="img" aria-label="speech">💬</span> Communicative</li>
+                                        </ul>
+                                    </AboutText>
+                                    <AboutImageContainer>
+                                        <img src={profilePic} alt="Vincent"/>
+                                    </AboutImageContainer>
+                                </AboutContainer>
+                            </Section>
 
-                {/* --- PHILOSOPHY SECTION (THE HOW) --- */}
-                <Section id="philosophy">
-                    <SectionTitle>My Philosophy & Toolkit</SectionTitle>
-                    <PhilosophyGrid>
-                        <PhilosophyCard>
-                            <PhilosophyIcon><FaUnity/></PhilosophyIcon>
-                            <h3>Engine Expertise</h3>
-                            <p>I use Unity and I am learning to use Godot to bring ideas to life. Very comfortable with Unity to create systems for: Gameplay, UI, and learning Multiplayer and AI</p>
-                        </PhilosophyCard>
-                        <PhilosophyCard>
-                            <PhilosophyIcon><SiSharp/></PhilosophyIcon>
-                            <h3>Logic & Language</h3>
-                            <p>C# is my primary tool for building performant, and scalable game logic. I write clean, maintainable code using concepts such as DRY so that my teammates can easily understand and build upon my code.</p>
-                        </PhilosophyCard>
-                        <PhilosophyCard>
-                            <PhilosophyIcon><FaCubes/></PhilosophyIcon>
-                            <h3>From Concept to Creation</h3>
-                            <p>I am comfortable working with different software, using tools like Blender for prototyping and Git for version control to ensure a smooth, collaborative workflow from the first commit to the final build.</p>
-                        </PhilosophyCard>
-                    </PhilosophyGrid>
-                </Section>
+                            {/* --- PHILOSOPHY SECTION (THE HOW) --- */}
+                            <Section id="philosophy">
+                                <SectionTitle>My Philosophy & Toolkit</SectionTitle>
+                                <PhilosophyGrid>
+                                    <PhilosophyCard>
+                                        <PhilosophyIcon><FaUnity/></PhilosophyIcon>
+                                        <h3>Engine Expertise</h3>
+                                        <p>I use Unity and I am learning to use Godot to bring ideas to life. Very
+                                            comfortable
+                                            with Unity to create systems for: Gameplay, UI, and learning Multiplayer and
+                                            AI</p>
+                                    </PhilosophyCard>
+                                    <PhilosophyCard>
+                                        <PhilosophyIcon><SiSharp/></PhilosophyIcon>
+                                        <h3>Logic & Language</h3>
+                                        <p>C# is my primary tool for building performant, and scalable game logic. I
+                                            write
+                                            clean, maintainable code using concepts such as DRY so that my teammates can
+                                            easily
+                                            understand and build upon my code.</p>
+                                    </PhilosophyCard>
+                                    <PhilosophyCard>
+                                        <PhilosophyIcon><FaCubes/></PhilosophyIcon>
+                                        <h3>From Concept to Creation</h3>
+                                        <p>I am comfortable working with different software, using tools like Blender
+                                            for
+                                            prototyping and Git for version control to ensure a smooth, collaborative
+                                            workflow
+                                            from the first commit to the final build.</p>
+                                    </PhilosophyCard>
+                                </PhilosophyGrid>
+                            </Section>
 
-                {/* --- PROJECTS SECTION (THE PROOF) --- */}
-                <Section id="projects">
-                    <SectionTitle>My Work</SectionTitle>
-                    <ProjectsGrid>
-                        {projects.map((p, i) => <ProjectCard key={i} {...p} />)}
-                    </ProjectsGrid>
-                </Section>
+                            {/* --- PROJECTS SECTION (THE PROOF) --- */}
+                            <Section id="projects">
+                                <SectionTitle>My Work</SectionTitle>
+                                <ProjectsGrid>
+                                    {projects.map((p, i) => <ProjectCard key={i} {...p} />)}
+                                </ProjectsGrid>
+                            </Section>
 
-                {/* --- CONTACT SECTION (THE INVITATION) --- */}
-                <Section id="contact">
-                    <SectionTitle>Let's Connect</SectionTitle>
-                    <ContactText>
-                        I'm currently looking for new opportunities to create amazing games with a passionate team. If you think I'd be a good fit, I'd love to hear from you.
-                    </ContactText>
-                    <ContactEmail href="mailto:lachenbekkie2701@gmail.com">lachenbekkie2701@gmail.com</ContactEmail>
-                    <SocialLinks>
-                        <a href="https://github.com/VincentvBruggen" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
-                        <a href="https://www.linkedin.com/in/vincent-van-bruggen/" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
-                        <a href="https://nt4p.itch.io/" target="_blank" rel="noopener noreferrer"><FaItchIo /></a>
-                    </SocialLinks>
-                </Section>
-            </MainContent>
+                            {/* --- CONTACT SECTION (THE INVITATION) --- */}
+                            <Section id="contact">
+                                <SectionTitle>Let's Connect</SectionTitle>
+                                <ContactText>
+                                    I'm currently looking for new opportunities to create amazing games with a
+                                    passionate
+                                    team.
+                                    If you think I'd be a good fit, I'd love to hear from you.
+                                </ContactText>
+                                <ContactEmail
+                                    href="mailto:lachenbekkie2701@gmail.com">lachenbekkie2701@gmail.com</ContactEmail>
+                                <SocialLinks>
+                                    <a href="https://github.com/VincentvBruggen" target="_blank"
+                                       rel="noopener noreferrer"><FaGithub/></a>
+                                    <a href="https://www.linkedin.com/in/vincent-van-bruggen/" target="_blank"
+                                       rel="noopener noreferrer"><FaLinkedin/></a>
+                                    <a href="https://nt4p.itch.io/" target="_blank"
+                                       rel="noopener noreferrer"><FaItchIo/></a>
+                                </SocialLinks>
+                            </Section>
+                        </MainContent>
+                    }/>
+                    <Route path="/projects/:projectId" element={<DynamicProjectPage/>}/>
+                </Routes>
+            </BrowserRouter>
 
         </ThemeProvider>
     );
