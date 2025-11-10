@@ -9,13 +9,16 @@ export default function Project1() {
     // Extended project data with additional details for this specific project
     const projectData: ExtendedProjectData = {
         ...baseProject,
-        longDescription: `Ballpit Chase was an exciting venture into local multiplayer game development where I explored Unity's modern Input System. The game challenges players in a fast-paced PvP arena where being the last person tagged means defeat. 
-        
-        This project taught me the importance of responsive controls and fair gameplay mechanics in competitive multiplayer games. I focused heavily on creating smooth player movement, intuitive tagging mechanics, and visual feedback that keeps players engaged throughout each match.`,
-        
-        date: "Fall 2023",
-        duration: "3 months",
-        teamSize: "4 developers, 2 artists",
+        longDescription:
+        "Ballpit Chase was my first actual venture into local multiplayer game development using Unity's new Input System." +
+        "Ballpit Chase is a 4-player local multiplayer tag game set in a vibrant ball pit arena. " +
+        "Where each player controls a colorful character trying to avoid being tagged while navigating through obstacles and interactive elements." +
+        "The game features dynamic arenas, smooth character controls, and engaging visual feedback to have a better game feel." +
+        "",
+
+        date: "November - December 2024",
+        duration: "4 weeks",
+        teamSize: "2 developers, 3 artists",
         role: "Lead Gameplay Programmer",
         
         features: [
@@ -31,7 +34,6 @@ export default function Project1() {
             "Unity Input System",
             "Universal Render Pipeline (URP)",
             "Shader Graph",
-            "ProBuilder",
             "Cinemachine"
         ],
         

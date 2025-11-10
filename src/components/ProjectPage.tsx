@@ -182,11 +182,11 @@ export default function ProjectPage({ projectData }: ProjectPageProps) {
                     <Section>
                         <SectionTitle>Technologies Used</SectionTitle>
                         <TechGrid>
-                            {tech.map((technology, index) => (
-                                <TechItem key={index} $primary>
-                                    {technology}
-                                </TechItem>
-                            ))}
+                            {/*{tech.map((technology, index) => (*/}
+                            {/*    <TechItem key={index} $primary>*/}
+                            {/*        {technology}*/}
+                            {/*    </TechItem>*/}
+                            {/*))}*/}
                             {tools && tools.map((tool, index) => (
                                 <TechItem key={`tool-${index}`}>
                                     {tool}

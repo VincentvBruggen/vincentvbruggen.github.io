@@ -12,6 +12,7 @@ import { SiSharp} from 'react-icons/si';
 
 // Assets
 import profilePic from './assets/images/profile.jpg';
+import otherPic from './assets/images/prayingProfile.jpg';
 // import project1Gif from './assets/images/project1.gif';
 // import project2Img from './assets/images/project2.png';
 
@@ -51,8 +52,8 @@ export default function App() {
                     </MobileMenuButton>
                     <Nav $open={menuOpen}>
                         <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
+                        <a href="#projects" onClick={() => setMenuOpen(false)}>My Work</a>
                         <a href="#philosophy" onClick={() => setMenuOpen(false)}>Philosophy</a>
-                        <a href="#projects" onClick={() => setMenuOpen(false)}>Work</a>
                         <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
                     </Nav>
                 </Header>
@@ -107,9 +108,18 @@ export default function App() {
                                         </ul>
                                     </AboutText>
                                     <AboutImageContainer>
-                                        <img src={profilePic} alt="Vincent"/>
+                                        <img className="main" src={otherPic} alt="Vincent"/>
+                                        <img className="hover" src={profilePic} alt="Vincent alternate"/>
                                     </AboutImageContainer>
                                 </AboutContainer>
+                            </Section>
+
+                            {/* --- PROJECTS SECTION (THE PROOF) --- */}
+                            <Section id="projects">
+                                <SectionTitle>My Work</SectionTitle>
+                                <ProjectsGrid>
+                                    {projects.map((p, i) => <ProjectCard key={i} {...p} />)}
+                                </ProjectsGrid>
                             </Section>
 
                             {/* --- PHILOSOPHY SECTION (THE HOW) --- */}
@@ -143,14 +153,6 @@ export default function App() {
                                             from the first commit to the final build.</p>
                                     </PhilosophyCard>
                                 </PhilosophyGrid>
-                            </Section>
-
-                            {/* --- PROJECTS SECTION (THE PROOF) --- */}
-                            <Section id="projects">
-                                <SectionTitle>My Work</SectionTitle>
-                                <ProjectsGrid>
-                                    {projects.map((p, i) => <ProjectCard key={i} {...p} />)}
-                                </ProjectsGrid>
                             </Section>
 
                             {/* --- CONTACT SECTION (THE INVITATION) --- */}
@@ -455,12 +457,30 @@ const AboutText = styled.div`
 const AboutImageContainer = styled.div`
     position: relative;
     max-width: 300px;
+    aspect-ratio: 2/3;
+    width: 100%;
     img {
         width: 100%;
-        height: auto;
+        height: 100%;
+        object-fit: cover;
         border-radius: 10px;
-        position: relative;
+        position: absolute;
+        top: 0;
+        left: 0;
         z-index: 2;
+        transition: opacity 1s ease;
+    }
+    img.main {
+        opacity: 1;
+    }
+    img.hover {
+        opacity: 0;
+    }
+    &:hover img.main {
+        opacity: 0;
+    }
+    &:hover img.hover {
+        opacity: 1;
     }
     &::after {
         content: '';
