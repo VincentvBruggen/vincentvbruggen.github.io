@@ -10,10 +10,10 @@ export default function Project1() {
     const projectData: ExtendedProjectData = {
         ...baseProject,
         longDescription:
-        "Ballpit Chase was my first actual venture into local multiplayer game development using Unity's new Input System." +
+        "Ballpit Chase was my first actual venture into local multiplayer game development using Unity's new Input System. " +
         "Ballpit Chase is a 4-player local multiplayer tag game set in a vibrant ball pit arena. " +
         "Where each player controls a colorful character trying to avoid being tagged while navigating through obstacles and interactive elements." +
-        "The game features dynamic arenas, smooth character controls, and engaging visual feedback to have a better game feel." +
+        "The game features dynamic arenas, smooth character controls, and engaging visual feedback for a better game feel. " +
         "",
 
         date: "November - December 2024",

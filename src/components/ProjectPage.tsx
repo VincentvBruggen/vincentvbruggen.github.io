@@ -1,5 +1,5 @@
-import React, { useState, useEffect, lazy, Suspense } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, { useState} from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt, FaArrowLeft, FaCalendar, FaUsers, FaClock, FaChevronDown, FaChevronUp, FaCode } from 'react-icons/fa';
@@ -110,7 +110,7 @@ export default function ProjectPage({ projectData }: ProjectPageProps) {
         image,
         images = [],
         videos = [],
-        tech,
+        // tech,
         features,
         challenges,
         learnings,
