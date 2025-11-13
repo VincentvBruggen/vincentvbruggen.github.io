@@ -108,8 +108,8 @@ export default function App() {
                                         </ul>
                                     </AboutText>
                                     <AboutImageContainer>
-                                        <img className="main" src={otherPic} alt="Vincent"/>
-                                        <img className="hover" src={profilePic} alt="Vincent alternate"/>
+                                        <img className="main" src={profilePic} alt="Vincent alternate"/>
+                                        <img className="hover" src={otherPic} alt="Vincent"/>
                                     </AboutImageContainer>
                                 </AboutContainer>
                             </Section>
