@@ -1,5 +1,4 @@
 import { ThemeProvider } from 'styled-components';
-import { GlobalStyle } from './styles/GlobalStyle';
 import { theme } from './styles/theme';
 import { Section } from './components/Section';
 import { ProjectCard, type ProjectCardProps } from './components/ProjectCard';
@@ -26,6 +25,7 @@ import type { Engine } from "tsparticles-engine";
 // Data
 import projectsData from './data/projects.json';
 import DynamicProjectPage from './components/DynamicProjectPage';
+import { GlobalStyle } from './styles/GlobalStyle';
 
 // === Main App Component ===
 export default function App() {
@@ -189,6 +189,7 @@ export default function App() {
 
 const MainContent = styled.main`
     display: flex;
+    max-width: 100%;
     flex-direction: column;
     align-items: center;
     gap: 120px;
@@ -245,7 +246,7 @@ const Nav = styled.nav<{ $open?: boolean }>`
     justify-content: center;
     gap: ${({ theme }) => theme.spacing.medium};
     width: 100%;
-    max-width: 1200px;
+    max-width: 100%;
     margin: 0 auto;
     box-sizing: border-box;
     transition: max-height 0.3s ease, opacity 0.3s ease;
@@ -324,7 +325,7 @@ const HeroSection = styled.section`
     display: flex;
     align-items: center;
     justify-content: center;
-    max-width: 1200px;
+    max-width: 100%;
     margin: 0 auto;
     padding: 0 24px;
     

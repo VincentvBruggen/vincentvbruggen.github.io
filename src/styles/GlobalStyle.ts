@@ -11,7 +11,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   html {
-      scroll-behavior: smooth; // <<< ADD THIS LINE
+    overflow-x: hidden;
+    scroll-behavior: smooth; // <<< ADD THIS LINE
   }
 
   body {
