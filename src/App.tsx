@@ -402,10 +402,13 @@ const CTAButton = styled.a`
     color: ${({ theme }) => theme.colors.primary};
     text-shadow: 0 0 10px ${({ theme }) => theme.colors.primary};
   }
-    
-    //@media (max-width: 600px) {
-    //    align-self: center;
-    //}
+
+    @media (max-width: 600px) {
+        display: block;
+        margin-left: 20vw;
+        margin-right: 20vw;
+        text-align: center;
+    }
 `;
 
 const SectionTitle = styled.h2`
