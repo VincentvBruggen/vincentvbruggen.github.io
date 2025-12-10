@@ -350,7 +350,7 @@ const HeroContent = styled.div`
   }
   h1 {
       font-size: clamp(32px, 10vw, 60px);
-    color: ${theme.colors.text};
+    color: ${({ theme }) => theme.colors.text};
     line-height: 1.1;
     margin: 0;
     text-shadow: none;
