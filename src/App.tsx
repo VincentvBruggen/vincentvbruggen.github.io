@@ -23,7 +23,7 @@ import { loadSlim } from "tsparticles-slim";
 import type { Engine } from "tsparticles-engine";
 
 // Data
-import projectsData from './data/projects.json';
+import { projects as projectsData } from './data/projects';
 import DynamicProjectPage from './components/DynamicProjectPage';
 import { GlobalStyle } from './styles/GlobalStyle';
 
@@ -35,7 +35,8 @@ export default function App() {
 
     // --- YOUR NARRATIVE DATA ---
     // Frame your projects as solutions or learning experiences
-    const projects: ProjectCardProps[] = projectsData;
+    // Sort projects by order field (lower numbers appear first)
+    const projects: ProjectCardProps[] = [...projectsData].sort((a, b) => a.order - b.order);
     return (
         <ThemeProvider theme={theme}>
         <GlobalStyle />
@@ -177,7 +178,7 @@ export default function App() {
                             </Section>
                         </MainContent>
                     }/>
-                    <Route path="/projects/:projectId" element={<DynamicProjectPage/>}/>
+                    <Route path="/projects/:slug" element={<DynamicProjectPage/>}/>
                 </Routes>
             </BrowserRouter>
 

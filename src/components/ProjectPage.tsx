@@ -9,7 +9,7 @@ import { riderTheme } from '../styles/riderTheme';
 
 // Base project data interface (from your JSON)
 export interface BaseProject {
-    id: string;
+    slug: string;
     title: string;
     description: string;
     image: string;
@@ -36,7 +36,7 @@ const isYouTubeUrl = (url: string): boolean => {
 
 // Helper function to extract YouTube video ID from URL
 const getYouTubeVideoId = (url: string): string | null => {
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
     const match = url.match(regExp);
     return (match && match[2].length === 11) ? match[2] : null;
 };
@@ -122,6 +122,7 @@ const CodeToggle: React.FC<{ snippet: CodeSnippet }> = ({ snippet }) => {
                                 <CodeContent>
                                     <SyntaxHighlighter 
                                         language={snippet.language} 
+                                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
                                         style={riderTheme as any}
                                         customStyle={{ margin: 0, backgroundColor: 'transparent' } as React.CSSProperties}
                                     >
@@ -551,14 +552,17 @@ const FeatureBullet = styled.span`
 `;
 
 const MediaGrid = styled.div`
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex; /* Change to flexbox */
+    flex-wrap: wrap; /* Allow items to wrap */
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
     gap: ${({ theme }) => theme.spacing.medium};
 `;
 
 const MediaItem = styled.div`
     border-radius: 8px;
     overflow: hidden;
+    max-width: 600px; /* Cap the width of individual media items */
     
     img, video {
         width: 100%;

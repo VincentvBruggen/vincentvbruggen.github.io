@@ -11,5 +11,6 @@ type ThemeType = typeof theme;
 // It tells TypeScript to merge our ThemeType into the DefaultTheme interface
 // from the styled-components library.
 declare module 'styled-components' {
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
     export interface DefaultTheme extends ThemeType {}
 }

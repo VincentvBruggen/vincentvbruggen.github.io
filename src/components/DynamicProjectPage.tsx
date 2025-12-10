@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import projectsData from '../data/projects.json';
+import { projects as projectsData } from '../data/projects';
 
 // Dynamic project component loader
 const DynamicProjectPage: React.FC = () => {
-    const { projectId } = useParams<{ projectId: string }>();
+    const { slug } = useParams<{ slug: string }>();
     const [ProjectComponent, setProjectComponent] = useState<React.ComponentType | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -16,34 +16,34 @@ const DynamicProjectPage: React.FC = () => {
 
     useEffect(() => {
         const loadProject = async () => {
-            if (!projectId) {
-                setError('No project ID provided');
+            if (!slug) {
+                setError('No project slug provided');
                 setLoading(false);
                 return;
             }
 
-            // Check if project exists in JSON data
-            const projectExists = projectsData.find(p => p.id === projectId);
+            // Check if project exists in data
+            const projectExists = projectsData.find(p => p.slug === slug);
             if (!projectExists) {
-                setError(`Project with ID "${projectId}" not found`);
+                setError(`Project with slug "${slug}" not found`);
                 setLoading(false);
                 return;
             }
 
             try {
                 // Try to dynamically import the project component
-                const module = await import(`../projects/${projectId}.tsx`);
+                const module = await import(`../projects/${slug}.tsx`);
                 setProjectComponent(() => module.default);
                 setLoading(false);
             } catch (importError) {
-                console.error(`Failed to load project ${projectId}:`, importError);
-                setError(`Project page for "${projectId}" is not yet implemented`);
+                console.error(`Failed to load project ${slug}:`, importError);
+                setError(`Project page for "${slug}" is not yet implemented`);
                 setLoading(false);
             }
         };
 
         loadProject();
-    }, [projectId]);
+    }, [slug]);
 
     if (loading) {
         return (

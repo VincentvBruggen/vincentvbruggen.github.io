@@ -12,6 +12,7 @@ const Card = styled(motion.div)`
     display: flex;
     flex-direction: column;
     transition: transform 0.3s ease;
+    height: 100%; // Ensure cards take full height of grid cell
 
     &:hover {
         transform: translateY(-5px);
@@ -102,7 +103,8 @@ const Links = styled.div`
 
 
 export interface ProjectCardProps {
-    id: string;
+    slug: string;
+    order: number;
     title: string;
     description: string;
     image: string; // URL to an image or GIF
@@ -112,9 +114,9 @@ export interface ProjectCardProps {
     imageClassName?: string; // Optional class for custom styling
 }
 
-export const ProjectCard: React.FC<ProjectCardProps> = ({ id, title, description, image, tech, githubUrl, liveUrl, imageClassName }) => {
+export const ProjectCard: React.FC<ProjectCardProps> = ({ slug, title, description, image, tech, githubUrl, liveUrl, imageClassName }) => {
     return (
-        <Link to={`/projects/${id}`} style={{ textDecoration: 'none' }}>
+        <Link to={`/projects/${slug}`} style={{ textDecoration: 'none' }}>
             <Card>
                 <ImageWrapper>
                 {image

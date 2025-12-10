@@ -1,9 +1,9 @@
 import ProjectPage from '../components/ProjectPage';
 import type { ExtendedProjectData } from '../components/ProjectPage';
-import projectsData from '../data/projects.json';
+import { projects as projectsData } from '../data/projects';
 
-export default function Project1() {
-    const baseProject = projectsData.find(p => p.id === '1');
+export default function BallpitChase() {
+    const baseProject = projectsData.find(p => p.slug === 'ballpit-chase');
     if (!baseProject) return <div>Project not found</div>;
 
     // Extended project data with additional details for this specific project
