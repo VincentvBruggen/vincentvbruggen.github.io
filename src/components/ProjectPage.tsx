@@ -120,7 +120,11 @@ const CodeToggle: React.FC<{ snippet: CodeSnippet }> = ({ snippet }) => {
                                     <CodeLanguage>{snippet.language}</CodeLanguage>
                                 </CodeHeader>
                                 <CodeContent>
-                                    <SyntaxHighlighter language={snippet.language} style={riderTheme} customStyle={{ margin: 0, backgroundColor: 'transparent' }}>
+                                    <SyntaxHighlighter 
+                                        language={snippet.language} 
+                                        style={riderTheme as any}
+                                        customStyle={{ margin: 0, backgroundColor: 'transparent' } as React.CSSProperties}
+                                    >
                                         {snippet.code}
                                     </SyntaxHighlighter>
                                 </CodeContent>
