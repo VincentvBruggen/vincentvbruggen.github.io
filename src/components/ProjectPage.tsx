@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt, FaArrowLeft, FaCalendar, FaUsers, FaClock, FaChevronDown, FaChevronUp, FaCode } from 'react-icons/fa';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { riderTheme } from '../styles/riderTheme';
 
 
 // Base project data interface (from your JSON)
@@ -26,8 +26,20 @@ export interface CodeSnippet {
     code: string;
     language: string; // e.g., 'csharp', 'javascript', 'typescript'
     image?: string;   // Optional image to go with the code
-    video?: string;   // Optional video to go with the code
+    video?: string;   // Optional video to go with the code (can be YouTube URL or local path)
 }
+
+// Helper function to check if a URL is a YouTube video
+const isYouTubeUrl = (url: string): boolean => {
+    return url.includes('youtube.com') || url.includes('youtu.be');
+};
+
+// Helper function to extract YouTube video ID from URL
+const getYouTubeVideoId = (url: string): string | null => {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
+};
 
 // Extended project data interface for detailed pages
 export interface ExtendedProjectData extends BaseProject {
@@ -86,6 +98,16 @@ const CodeToggle: React.FC<{ snippet: CodeSnippet }> = ({ snippet }) => {
                                 <CodeMedia>
                                     {snippet.video.endsWith('.gif') ? (
                                         <img src={snippet.video} alt={snippet.title} />
+                                    ) : isYouTubeUrl(snippet.video) ? (
+                                        <YouTubeEmbed>
+                                            <iframe
+                                                src={`https://www.youtube.com/embed/${getYouTubeVideoId(snippet.video)}`}
+                                                title={snippet.title}
+                                                frameBorder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowFullScreen
+                                            />
+                                        </YouTubeEmbed>
                                     ) : (
                                         <video src={snippet.video} autoPlay loop muted playsInline />
                                     )}
@@ -98,7 +120,7 @@ const CodeToggle: React.FC<{ snippet: CodeSnippet }> = ({ snippet }) => {
                                     <CodeLanguage>{snippet.language}</CodeLanguage>
                                 </CodeHeader>
                                 <CodeContent>
-                                    <SyntaxHighlighter language={snippet.language} style={dark} customStyle={{ margin: 0, backgroundColor: 'transparent' }}>
+                                    <SyntaxHighlighter language={snippet.language} style={riderTheme} customStyle={{ margin: 0, backgroundColor: 'transparent' }}>
                                         {snippet.code}
                                     </SyntaxHighlighter>
                                 </CodeContent>
@@ -150,6 +172,16 @@ export default function ProjectPage({ projectData }: ProjectPageProps) {
                         {image ? (
                             image.endsWith('.mp4') || image.endsWith('.webm') ? (
                                 <video src={image} autoPlay loop muted playsInline />
+                            ) : isYouTubeUrl(image) ? (
+                                <YouTubeEmbed>
+                                    <iframe
+                                        src={`https://www.youtube.com/embed/${getYouTubeVideoId(image)}`}
+                                        title={title}
+                                        frameBorder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowFullScreen
+                                    />
+                                </YouTubeEmbed>
                             ) : (
                                 <img src={image} alt={title} />
                             )
@@ -231,7 +263,19 @@ export default function ProjectPage({ projectData }: ProjectPageProps) {
                                 ))}
                                 {videos.map((video, index) => (
                                     <MediaItem key={`video-${index}`}>
-                                        <video src={video} controls />
+                                        {isYouTubeUrl(video) ? (
+                                            <YouTubeEmbed>
+                                                <iframe
+                                                    src={`https://www.youtube.com/embed/${getYouTubeVideoId(video)}`}
+                                                    title={`${title} video ${index + 1}`}
+                                                    frameBorder="0"
+                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                    allowFullScreen
+                                                />
+                                            </YouTubeEmbed>
+                                        ) : (
+                                            <video src={video} controls />
+                                        )}
                                     </MediaItem>
                                 ))}
                             </MediaGrid>
@@ -588,6 +632,24 @@ const CodeMedia = styled.div`
         width: 25%;
         height: auto;
         display: block;
+    }
+`;
+
+const YouTubeEmbed = styled.div`
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    width: 100%;
+    border-radius: 6px;
+    
+    iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 6px;
     }
 `;
 

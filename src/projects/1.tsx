@@ -40,13 +40,13 @@ export default function Project1() {
         ],
         
         videos: [
-            "/projectAssets/1/videos/Ballpit-gamplay.mp4"
+            "https://youtu.be/uPHAsQa7ArY?si=MnfodplQverjYHCx"
         ],
         
         challenges: [
             "Mastering Unity's new Input System for local multiplayer controls",
             "Ensuring fair gameplay mechanics where players gain buffs and debuffs appropriately",
-            "Creating intuitive visual feedback that works in the chaos of multiplayer action"
+            "Creating intuitive visual feedback that works with the chaos of multiplayer action"
         ],
         
         learnings: [
@@ -63,11 +63,12 @@ export default function Project1() {
                     " It's the code the whole game runs around. This script makes it so that when a player is tagged," +
                     " They become the new tagger and gets stunned, the old tagger gains a speedbuff and effects occur for visualizing the tagger change.",
                 language: "csharp",
-                video: "/projectAssets/1/videos/tagged.gif",
+                video: "/projectAssets/1/videos/tagged.gif", // Keep GIF as-is, or replace with YouTube URL if needed
                 code:
                 `
                      private void OnCollisionEnter(Collision collision)
                     {
+                        PlayerManager otherPlayer = collision.collider.GetComponent<PlayerManager>();
                         if (isTagger && !stunned)
                         {
                             if (collision.collider.CompareTag("Player"))
@@ -75,13 +76,40 @@ export default function Project1() {
                                 isTagger = false;
                                 StartCoroutine(RunAwayBuff());
                                 FindObjectOfType<AudioManager>().Play("Tag");
-                                StartCoroutine(collision.collider.GetComponent<PlayerManager>().Tagged());
+                                StartCoroutine(otherPlayer.Tagged());
                             }
                         }
                 
                         if (collision.gameObject.CompareTag("Ladder"))
                         {
                             anim.SetTrigger("Ladder");
+                        }
+                    }
+                    
+                    public IEnumerator RunAwayBuff()
+                    {
+                        SpeedBuff();
+                        yield return new WaitForSeconds(runAwayTime);
+                        isBuffed = false;
+                        moveSpeed -= speedBuff;
+                    }
+                    
+                    public IEnumerator Tagged()
+                    {
+                        isTagger = true;
+                        stunned = true;
+                        anim.SetBool("Stun", true);
+                        yield return new WaitForSeconds(stunTime);
+                        stunned = false;
+                        anim.SetBool("Stun", false);
+                    }
+                    
+                    private void SpeedBuff()
+                    {
+                        if (!isBuffed)
+                        {
+                            moveSpeed += speedBuff;
+                            isBuffed = true;
                         }
                     }
                 `
