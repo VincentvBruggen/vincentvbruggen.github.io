@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt, FaArrowLeft, FaCalendar, FaUsers, FaClock, FaChevronDown, FaChevronUp, FaCode } from 'react-icons/fa';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+
 
 // Base project data interface (from your JSON)
 export interface BaseProject {
@@ -81,7 +84,11 @@ const CodeToggle: React.FC<{ snippet: CodeSnippet }> = ({ snippet }) => {
                             )}
                             {snippet.video && (
                                 <CodeMedia>
-                                    <video src={snippet.video} controls />
+                                    {snippet.video.endsWith('.gif') ? (
+                                        <img src={snippet.video} alt={snippet.title} />
+                                    ) : (
+                                        <video src={snippet.video} autoPlay loop muted playsInline />
+                                    )}
                                 </CodeMedia>
                             )}
                             
@@ -91,9 +98,12 @@ const CodeToggle: React.FC<{ snippet: CodeSnippet }> = ({ snippet }) => {
                                     <CodeLanguage>{snippet.language}</CodeLanguage>
                                 </CodeHeader>
                                 <CodeContent>
-                                    <pre><code>{snippet.code}</code></pre>
+                                    <SyntaxHighlighter language={snippet.language} style={dark} customStyle={{ margin: 0, backgroundColor: 'transparent' }}>
+                                        {snippet.code}
+                                    </SyntaxHighlighter>
                                 </CodeContent>
                             </CodeBlock>
+
                         </CodeToggleInner>
                     </CodeToggleContent>
                 )}
@@ -571,9 +581,11 @@ const CodeMedia = styled.div`
     margin-bottom: ${({ theme }) => theme.spacing.medium};
     border-radius: 6px;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
     
     img, video {
-        width: 100%;
+        width: 25%;
         height: auto;
         display: block;
     }
