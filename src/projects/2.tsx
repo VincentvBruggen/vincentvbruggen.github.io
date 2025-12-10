@@ -56,8 +56,9 @@ export default function Project2() {
         ],
         
         videos: [
-            "/assets/videos/ADD_VIDEO_1_FILENAME_HERE.mp4",
-            "/assets/videos/ADD_VIDEO_2_FILENAME_HERE.mp4"
+            "https://www.youtube.com/watch?v=YOUR_VIDEO_ID_HERE", // Use YouTube URL to avoid Git size limits
+            "https://youtu.be/YOUR_VIDEO_ID_HERE" // Both YouTube formats work
+            // Or use local paths for small videos: "/assets/videos/small-video.mp4"
             // Add as many videos as you have, remove if no videos
         ],
         
@@ -84,7 +85,7 @@ export default function Project2() {
                 description: "ADD DESCRIPTION OF WHAT THIS CODE DOES AND WHY IT'S IMPORTANT",
                 language: "csharp", // Change to: csharp, javascript, typescript, python, hlsl, etc.
                 image: "/assets/images/ADD_IMAGE_FOR_CODE_1.png", // Optional - remove line if no image
-                // video: "/assets/videos/ADD_VIDEO_FOR_CODE_1.mp4", // Optional - uncomment if you have a video
+                // video: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID", // Optional - use YouTube URL or local path
                 code: `// ADD YOUR ACTUAL CODE HERE
 // This is where you paste the real code from your project
 // Make sure to format it properly and include comments
@@ -103,7 +104,7 @@ public class ExampleClass : MonoBehaviour
                 description: "ADD DESCRIPTION OF WHAT THIS CODE DOES",
                 language: "csharp", // Change language as needed
                 // image: "/assets/images/ADD_IMAGE_FOR_CODE_2.png", // Optional
-                video: "/assets/videos/ADD_VIDEO_FOR_CODE_2.mp4", // Optional - remove if no video
+                video: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID", // Optional - YouTube URL or local path for small videos
                 code: `// ADD YOUR SECOND CODE SNIPPET HERE
 // You can have as many code snippets as you want
 // Each one will be a collapsible section on your project page
