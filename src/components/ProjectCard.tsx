@@ -133,8 +133,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ slug, title, descripti
                     {tech.map(t => <TechItem key={t}>{t}</TechItem>)}
                     </TechList>
                     <Links>
-                    {githubUrl && <a href={githubUrl} target="_blank" rel="noopener noreferrer"><FaGithub/></a>}
-                    {liveUrl && <a href={liveUrl} target="_blank" rel="noopener noreferrer"><FaExternalLinkAlt/></a>}
+                    {githubUrl && <a href={githubUrl} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}><FaGithub/></a>}
+                    {liveUrl && <a href={liveUrl} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}><FaExternalLinkAlt/></a>}
                     </Links>
                 </Content>
             </Card>

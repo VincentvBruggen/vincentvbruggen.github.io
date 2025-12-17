@@ -166,7 +166,7 @@ export default function App() {
                                     If you think I'd be a good fit, I'd love to hear from you.
                                 </ContactText>
                                 <ContactEmail
-                                    href="mailto:lachenbekkie2701@gmail.com">lachenbekkie2701@gmail.com</ContactEmail>
+                                    href="mailto:vincent.vanbruggen@kpnmail.nl">vincent.vanbruggen@kpnmail.nl</ContactEmail>
                                 <SocialLinks>
                                     <a href="https://github.com/VincentvBruggen" target="_blank"
                                        rel="noopener noreferrer"><FaGithub/></a>

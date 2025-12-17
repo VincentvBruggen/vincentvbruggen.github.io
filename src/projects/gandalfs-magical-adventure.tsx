@@ -16,7 +16,7 @@ export default function GandalfsMagicalAdventure() {
     // Extended project data with additional details for this specific project
     const projectData: ExtendedProjectData = {
         ...baseProject,
-        longDescription: "This project was my first time building a game with an team of developers and artists. I was responsible for most of the gameplay programming, including the player controller, enemy AI, and various game mechanics. The game is a 3d shoot em up where you play as a wizard that needs to defeat the giant spider.",
+        longDescription: "This project was my first time building a game with a team of developers and artists. I was responsible for most of the gameplay programming, including the player controller, enemy AI, and various game mechanics. The game is a 3D shoot 'em up where you play as a wizard who needs to defeat the giant spider.",
         date: "To be updated",
         duration: "To be updated",
         teamSize: "To be updated",

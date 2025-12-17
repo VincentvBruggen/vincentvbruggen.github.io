@@ -16,7 +16,7 @@ export default function TotalWarfare() {
     // Extended project data with additional details for this specific project
     const projectData: ExtendedProjectData = {
         ...baseProject,
-        longDescription: "This project was my first experience with online multiplayer game development using Photon Pun 2. I was creating a sci-fi themed 3rd person RTS game with working online multiplayer where players could build bases, gather resources and use their armies to defeat the enemy. I was able to implement some core gameplay mechanics such as building placement, and ordering units. However, due to time constraints, the project was not completed and remains a work in progress.",
+        longDescription: "This project was my first experience with online multiplayer game development using Photon Pun 2. I was creating a sci-fi themed 3rd person RTS game with working online multiplayer where players could build bases, gather resources, and use their armies to defeat the enemy. I was able to implement some core gameplay mechanics, such as building placement and ordering units. However, due to time constraints, the project was not completed and remains a work in progress.",
         date: "March - April 2024",
         duration: "5 weeks",
         teamSize: "1",
@@ -29,10 +29,10 @@ export default function TotalWarfare() {
         ],
         tools: ["Unity", "C#", "URP", "Photon Pun 2"],
         images: [],
-        videos: [],
+        videos: ["https://youtu.be/cpAd7SIUvVU?si=YsqBbw2HBgq9YtpU"],
         challenges: [
-            "Implementing online multiplayer where players are able to place objects while playing.",
-            "Networking the players so that they cannot see each other unless seen in the fog."
+            "Implementing online multiplayer where players can place objects while playing.",
+            "Networking players so that they cannot see each other unless visible in the fog."
         ],
         learnings: [
             "Gained experience with the Photon PUN 2 framework for multiplayer games.",

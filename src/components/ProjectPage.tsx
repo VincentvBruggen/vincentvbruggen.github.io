@@ -61,7 +61,7 @@ interface ProjectPageProps {
     projectData: ExtendedProjectData;
 }
 
-const CodeToggle: React.FC<{ snippet: CodeSnippet }> = ({ snippet }) => {
+const CodeToggle: React.FC<{ snippet: CodeSnippet, setSelectedImage: (src: string) => void }> = ({ snippet, setSelectedImage }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
@@ -90,16 +90,20 @@ const CodeToggle: React.FC<{ snippet: CodeSnippet }> = ({ snippet }) => {
                             
                             {/* Media content (image or video) */}
                             {snippet.image && (
-                                <CodeMedia>
+                                <CodeMedia onClick={() => setSelectedImage(snippet.image!)}>
                                     <img src={snippet.image} alt={snippet.title} />
                                 </CodeMedia>
                             )}
                             {snippet.video && (
-                                <CodeMedia>
+                                <CodeMedia onClick={() => {
+                                    if (snippet.video) {
+                                        setSelectedImage(snippet.video);
+                                    }
+                                }}>
                                     {snippet.video.endsWith('.gif') ? (
                                         <img src={snippet.video} alt={snippet.title} />
                                     ) : isYouTubeUrl(snippet.video) ? (
-                                        <YouTubeEmbed>
+                                        <YouTubeEmbed onClick={() => window.open(snippet.video, '_blank')}>
                                             <iframe
                                                 src={`https://www.youtube.com/embed/${getYouTubeVideoId(snippet.video)}`}
                                                 title={snippet.title}
@@ -140,6 +144,7 @@ const CodeToggle: React.FC<{ snippet: CodeSnippet }> = ({ snippet }) => {
 };
 
 export default function ProjectPage({ projectData }: ProjectPageProps) {
+    const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const {
         title,
         description,
@@ -160,6 +165,20 @@ export default function ProjectPage({ projectData }: ProjectPageProps) {
         tools,
         codeSnippets = []
     } = projectData;
+
+    const openModal = (src: string) => {
+        // For videos and GIFs, we can open them directly without preloading
+        if (src.endsWith('.mp4') || src.endsWith('.webm') || src.endsWith('.gif')) {
+            setSelectedImage(src);
+            return;
+        }
+
+        const img = new Image();
+        img.onload = () => {
+            setSelectedImage(src);
+        };
+        img.src = src;
+    };
 
     return (
         <PageContainer>
@@ -262,12 +281,12 @@ export default function ProjectPage({ projectData }: ProjectPageProps) {
                             <SectionTitle>Screenshots & Media</SectionTitle>
                             <MediaGrid>
                                 {images.map((img, index) => (
-                                    <MediaItem key={index}>
+                                    <MediaItem key={index} onClick={() => openModal(img)}>
                                         <img src={img} alt={`${title} screenshot ${index + 1}`} />
                                     </MediaItem>
                                 ))}
                                 {videos.map((video, index) => (
-                                    <MediaItem key={`video-${index}`}>
+                                    <MediaItem key={`video-${index}`} onClick={() => openModal(video)}>
                                         {isYouTubeUrl(video) ? (
                                             <YouTubeEmbed>
                                                 <iframe
@@ -278,6 +297,8 @@ export default function ProjectPage({ projectData }: ProjectPageProps) {
                                                     allowFullScreen
                                                 />
                                             </YouTubeEmbed>
+                                        ) : video.endsWith('.gif') ? (
+                                            <img src={video} alt={`${title} media ${index + 1}`} />
                                         ) : (
                                             <video src={video} controls />
                                         )}
@@ -287,13 +308,41 @@ export default function ProjectPage({ projectData }: ProjectPageProps) {
                         </Section>
                     )}
 
+                    <AnimatePresence>
+                        {selectedImage && (
+                            <ModalBackdrop
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                onClick={() => setSelectedImage(null)}
+                            >
+                                                                <ModalContent
+                                                                    initial={{ scale: 0.8, opacity: 0 }}
+                                                                    animate={{ scale: 1, opacity: 1 }}
+                                                                    exit={{ scale: 0.8, opacity: 0 }}
+                                                                    onClick={(e) => e.stopPropagation()} // Prevent closing when clicking on the content
+                                                                >
+                                                                    {selectedImage.endsWith('.mp4') || selectedImage.endsWith('.webm') ? (
+                                                                        <ModalVideo src={selectedImage} controls autoPlay />
+                                                                    ) : (
+                                                                        <ModalImage
+                                                                            src={selectedImage}
+                                                                            alt="Expanded view"
+                                                                        />
+                                                                    )}
+                                                                    <CloseButton onClick={() => setSelectedImage(null)}>&times;</CloseButton>
+                                                                </ModalContent>
+                            </ModalBackdrop>
+                        )}
+                    </AnimatePresence>
+                    
                     {/* Code Snippets */}
                     {codeSnippets.length > 0 && (
                         <Section>
                             <SectionTitle>Code Implementation</SectionTitle>
                             <CodeSnippetsContainer>
                                 {codeSnippets.map((snippet, index) => (
-                                    <CodeToggle key={index} snippet={snippet} />
+                                    <CodeToggle key={index} snippet={snippet} setSelectedImage={openModal} />
                                 ))}
                             </CodeSnippetsContainer>
                         </Section>
@@ -360,6 +409,7 @@ const PageContainer = styled.div`
 
 const Header = styled.div`
     position: fixed;
+
     top: 0;
     left: 0;
     right: 0;
@@ -538,7 +588,7 @@ const FeaturesList = styled.ul`
     list-style: none;
     display: grid;
     gap: ${({ theme }) => theme.spacing.small};
-    max-width: 800px;
+    max-width: 100%;
 `;
 
 const FeatureItem = styled.li`
@@ -552,17 +602,18 @@ const FeatureBullet = styled.span`
 `;
 
 const MediaGrid = styled.div`
-    display: flex; /* Change to flexbox */
-    flex-wrap: wrap; /* Allow items to wrap */
-    justify-content: center; /* Center items horizontally */
-    align-items: center; /* Center items vertically */
+    display: flex;
+    flex-wrap: wrap;
     gap: ${({ theme }) => theme.spacing.medium};
+    justify-content: flex-start; /* Align items to the start */
 `;
 
 const MediaItem = styled.div`
     border-radius: 8px;
     overflow: hidden;
-    max-width: 600px; /* Cap the width of individual media items */
+    flex: 1 1 300px; /* Flex properties */
+    max-width: 400px; /* Max width for each item */
+    cursor: pointer;
     
     img, video {
         width: 100%;
@@ -631,14 +682,16 @@ const CodeDescription = styled.p`
 
 const CodeMedia = styled.div`
     margin-bottom: ${({ theme }) => theme.spacing.medium};
-    border-radius: 6px;
     overflow: hidden;
     display: flex;
     justify-content: center;
+    cursor: pointer;
+    border-radius: 6px;
     
-    img, video {
-        width: 25%;
-        height: auto;
+    > img, > video {
+        height: 100%;
+        width: auto;
+        max-height: 40vh;
         display: block;
     }
 `;
@@ -758,3 +811,58 @@ const ProjectLink = styled.a`
         box-shadow: 0 5px 15px ${({ theme }) => theme.colors.secondary}40;
     }
 `;
+
+
+const CloseButton = styled.button`
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1010;
+`;
+const ModalBackdrop = styled(motion.div)`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+`;
+
+const ModalContent = styled(motion.div)`
+    position: relative;
+    max-width: 80vw;
+    max-height: 80vh;
+    display: flex; /* Re-add flex to center the content */
+    align-items: center;
+    justify-content: center;
+`;
+
+const ModalImage = styled.img`
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    border-radius: 10px;
+`;
+
+const ModalVideo = styled.video`
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    border-radius: 10px;
+`;
+

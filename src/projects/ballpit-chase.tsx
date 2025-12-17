@@ -10,10 +10,10 @@ export default function BallpitChase() {
     const projectData: ExtendedProjectData = {
         ...baseProject,
         longDescription:
-        "Ballpit Chase was my first actual venture into local multiplayer game development in which i used Unity's new Input System to achieve a smooth and responsive gameplay experience. " +
-        "Ballpit Chase is a 4-player local multiplayer game where you play tag, set in a vibrant ball pit arena. " +
-        "Each player controls a colorful character trying to avoid being tagged by whoever is assigned tagger, while navigating using obstacles and interactive elements." +
-        "The game features: dynamic arenas, smooth character controls, and engaging visual feedback for a better game feel. ",
+        "Ballpit Chase was my first actual venture into local multiplayer game development in which I used Unity's new Input System to achieve a smooth and responsive gameplay experience. " +
+        "Ballpit Chase is a 4-player local multiplayer game where players play tag in a vibrant ball pit arena. " +
+        "Each player controls a colorful character trying to avoid being tagged by the assigned tagger, navigating through obstacles and interactive elements." +
+        "The game features dynamic arenas, smooth character controls, and engaging visual feedback for a better game feel. ",
 
         date: "November - December 2024",
         duration: "4 weeks",
@@ -45,7 +45,7 @@ export default function BallpitChase() {
         
         challenges: [
             "Mastering Unity's new Input System for local multiplayer controls",
-            "Ensuring fair gameplay mechanics where players gain buffs and debuffs appropriately",
+            "Ensuring fair gameplay mechanics where players appropriately gain buffs and debuffs",
             "Creating intuitive visual feedback that works with the chaos of multiplayer action"
         ],
         
@@ -59,9 +59,7 @@ export default function BallpitChase() {
         codeSnippets: [
             {
                 title: "Player Tagging Mechanic",
-                description: "This script handles the core and essential tagging mechanic." +
-                    " It's the code the whole game runs around. This script makes it so that when a player is tagged," +
-                    " They become the new tagger and gets stunned, the old tagger gains a speedbuff and effects occur for visualizing the tagger change.",
+                description: "This script handles the core tagging mechanic, which the entire game revolves around. When a player is tagged, they become the new tagger and are stunned. The old tagger gains a speed buff, and visual effects occur to indicate the tagger change.",
                 language: "csharp",
                 video: "/projectAssets/1/videos/tagged.gif", // Keep GIF as-is, or replace with YouTube URL if needed
                 code:
@@ -116,9 +114,7 @@ export default function BallpitChase() {
             },
             {
                 title: "Shadow Projection Script",
-                description: "A core mechanic that shows the players their shadow. " +
-                    "Very important for the gameplay experience as it helps visualizing the player's landing when airborne." +
-                    " And as a bonus can be used to visualize who is currently the tagged player by changing its color.",
+                description: "This is very important for the gameplay experience as it helps visualize the player's landing when airborne. As a bonus, it can also visualize the currently tagged player by changing its color.",
                 language: "csharp",
                 image: "/projectAssets/1/images/shadow.png",
                 code:

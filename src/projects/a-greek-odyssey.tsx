@@ -16,7 +16,7 @@ export default function AGreekOdyssey() {
     // Extended project data with additional details for this specific project
     const projectData: ExtendedProjectData = {
         ...baseProject,
-        longDescription: "This project was my first time creating a complete game from scratch within a team of developers and artists. I was responsible for the multiplayer functionality since I had some experience with Photon Pun 2. The game is a Mario Party inspired game where players compete in various mini-games to collect coins and ambrosia, for the one with the most ambrosia wins.",
+        longDescription: "This project was my first time creating a complete game from scratch within a team of developers and artists. I was responsible for the multiplayer functionality since I had some experience with Photon Pun 2. The game is a Mario Party inspired game where players compete in various mini-games to collect coins and ambrosia, the one with the most ambrosia wins.",
         date: "To be updated",
         duration: "To be updated",
         teamSize: "To be updated",
