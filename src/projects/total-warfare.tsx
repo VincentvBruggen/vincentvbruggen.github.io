@@ -41,25 +41,100 @@ export default function TotalWarfare() {
         ],
         codeSnippets: [
             {
-                title: "Placeholder: Building Placement System",
-                description: "This is a placeholder code snippet. The code below demonstrates the logic for placing buildings in the game world, a core mechanic of the RTS gameplay. It would typically involve raycasting, grid validation, and network instantiation.",
+                title: "Unit Selection Logic",
+                description: "This code snippet illustrates the logic for selecting units in the game. It handles both single selection and multi-selection using the shift key, as well as deselection when clicking on empty space or other non-selectable objects. The code also includes logic for issuing orders to selected units when a building is selected. The function is called on Left Click.",
                 language: "csharp",
-                code: `public class BuildingPlacementSystem : MonoBehaviour
-{
-    // [SerializeField] private GameObject buildingPrefab;
-    
-    void Update()
+                code: `
+    public void OnSelect(InputAction.CallbackContext context)
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!context.performed) return;
+        if(!GameManager.instance.isGameStarted){ return;}
+
+        Vector3 position = Mouse.current.position.ReadValue();
+        Ray ray = Camera.main.ScreenPointToRay(position);
+        if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            // 1. Raycast from camera to the ground
-            // 2. Check if the placement is valid (e.g., not on a steep slope, not overlapping)
-            // 3. If valid, instantiate the building locally
-            // 4. Send an RPC to other players to instantiate the building on their clients
-            Debug.Log("Placeholder for building placement logic.");
+            ISelectable selectable = hit.collider.GetComponent<ISelectable>();
+            PhotonView selectablePhotonView = hit.collider.GetComponent<PhotonView>();
+
+            if (selectable == null || selectablePhotonView == null)
+            {
+                if(EventSystem.current.IsPointerOverGameObject()){return;}
+                    
+                foreach (GameObject unit in selectedUnits)
+                {
+                    unit.GetComponent<ISelectable>().OnDeselect(gameObject);
+                }
+                selectedUnits.Clear();
+                return;
+            }
+
+            GameObject selectedUnit = hit.collider.gameObject;
+
+            if (Keyboard.current.shiftKey.IsPressed())
+            {
+                if (!selectedUnits.Contains(selectedUnit))
+                {
+                    selectedUnits.Add(selectedUnit);
+                    selectable.OnSelect(gameObject);
+                }
+                else
+                {
+                    selectedUnits.Remove(selectedUnit);
+                    selectable.OnDeselect(gameObject);
+                }
+            }
+            else
+            {
+                foreach (GameObject unit in selectedUnits)
+                {
+                    unit.GetComponent<ISelectable>().OnDeselect(gameObject);
+                }
+                
+                selectedUnits.Clear();
+                if (!selectedUnits.Contains(selectedUnit))
+                {
+                    selectedUnits.Add(selectedUnit);
+                    selectable.OnSelect(gameObject);
+                }
+            }
         }
     }
-}`
+
+                `
+            },
+            {
+                title: "Unit Ordering System",
+                description: "This code snippet demonstrates the logic for sending orders to units in the game. It checks if the shift key is pressed to determine whether to queue orders or replace existing ones, and it handles clearing orders and resetting unit states accordingly.",
+                language: "csharp",
+                code: `private void SendingOrder(OrderBase order, BaseUnit unit)
+    {
+        if (!Keyboard.current.shiftKey.isPressed) //check if shift is pressed, if not then clear orders and reset unit states
+            foreach (OrderBase script in unit.GetComponents<OrderBase>())
+            {
+                script.status = Node.Status.Success;
+            }
+
+            if (unit.ordersList.Count > 0)
+            {
+                unit.ordersList[0].status = Node.Status.Success;
+                unit.ordersList[0].enabled = false;
+                unit.ordersList.Clear();
+            }
+            unit.orderTargetPositions.Clear();
+            
+            unit.state = UnitState.Idle;
+        }
+        if (unit.ordersList.Count == 0)
+        {
+            foreach (OrderBase script in unit.GetComponents<OrderBase>())
+            {
+                script.status = Node.Status.Success;
+            }
+        }
+        
+        unit.SendOrder(order, targetPosition); //send order to the unit, with target position if needed
+    }`
             }
         ]
     };
